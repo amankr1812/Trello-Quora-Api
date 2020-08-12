@@ -30,6 +30,7 @@ public class UserEntity implements Serializable {
   @Size(max = 200)
   @NotNull
   private String uuid;
+  
 
   @Column(name = "firstname")
   @NotNull

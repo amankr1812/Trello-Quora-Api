@@ -26,6 +26,7 @@ public class UserAuthEntity {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
 
+  
   @Column(name = "uuid")
   @NotNull
   @Size(max = 200)
