@@ -12,6 +12,7 @@ public class UserAuthDao {
 
   @PersistenceContext private EntityManager entityManager;
 
+
   public UserAuthEntity getUserAuthByToken(final String accessToken) {
     try {
       return entityManager
@@ -22,6 +23,7 @@ public class UserAuthDao {
       return null;
     }
   }
+
 
   public UserAuthEntity createAuthToken(final UserAuthEntity userAuthEntity) {
     entityManager.persist(userAuthEntity);
