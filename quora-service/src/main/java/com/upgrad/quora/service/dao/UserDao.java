@@ -28,6 +28,7 @@ public class UserDao {
     return userEntity;
   }
 
+
   public UserEntity getUserByUserName(final String userName) {
     try {
       return entityManager
@@ -38,7 +39,6 @@ public class UserDao {
       return null;
     }
   }
-
 
   public UserEntity getUserByEmail(final String email) {
     try {
@@ -55,11 +55,5 @@ public class UserDao {
     entityManager.merge(updatedUserEntity);
   }
 
-  public UserEntity deleteUser(final String userId) {
-    UserEntity deleteUser = getUserById(userId);
-    if (deleteUser != null) {
-      this.entityManager.remove(deleteUser);
-    }
-    return deleteUser;
-  }
+
 }
