@@ -1,14 +1,12 @@
 package com.upgrad.quora.api.controller;
 
 import com.upgrad.quora.api.model.SigninResponse;
-import com.upgrad.quora.api.model.SignoutResponse;
 import com.upgrad.quora.api.model.SignupUserRequest;
 import com.upgrad.quora.api.model.SignupUserResponse;
 import com.upgrad.quora.service.business.UserAuthenticationService;
 import com.upgrad.quora.service.entity.UserAuthEntity;
 import com.upgrad.quora.service.entity.UserEntity;
 import com.upgrad.quora.service.exception.AuthenticationFailedException;
-import com.upgrad.quora.service.exception.SignOutRestrictedException;
 import com.upgrad.quora.service.exception.SignUpRestrictedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -57,6 +55,29 @@ public class UserController {
             .id(createdUserEntity.getUuid())
             .status("USER SUCCESSFULLY REGISTERED");
     return new ResponseEntity<SignupUserResponse>(userResponse, HttpStatus.CREATED);
+  }
+
+
+  /*
+   * This method used for signin of the user.
+   * In this method the username and password fields are authenticated
+   * and respective result or message is being displayed to the use
+   */
+  @RequestMapping(method = RequestMethod.POST, path = "/user/signin", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+  public ResponseEntity<SigninResponse> signin(@RequestHeader("authorization") final String authorization)
+          throws AuthenticationFailedException {
+
+    byte[] decode = Base64.getDecoder().decode(authorization.split("Basic ")[1]);
+    String decodedText = new String(decode);
+    String[] decodedArray = decodedText.split(":");
+    UserAuthEntity userAuthEntity = userAuthService.signin(decodedArray[0], decodedArray[1]);
+    HttpHeaders headers = new HttpHeaders();
+    headers.add("access-token", userAuthEntity.getAccessToken());
+    SigninResponse signinResponse = new SigninResponse();
+    signinResponse.setId(userAuthEntity.getUserEntity().getUuid());
+    signinResponse.message("SIGNED IN SUCCESSFULLY");
+
+    return new ResponseEntity<SigninResponse>(signinResponse, headers, HttpStatus.OK);
   }
 
   }
