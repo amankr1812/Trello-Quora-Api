@@ -5,24 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="47a15d9d-c79e-46a9-bbbf-df38ac55657d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/quora-api/src/main/java/com/upgrad/quora/api/controller/CommonController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/quora-service/src/main/java/com/upgrad/quora/service/business/CommonService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quora-api/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/quora-api/src/main/resources/application.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quora-api/target/classes/META-INF/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/quora-api/target/classes/META-INF/maven/com.upgrad.quora/quora-api/pom.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/quora-api/target/classes/META-INF/maven/com.upgrad.quora/quora-api/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/quora-api/target/classes/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/quora-api/target/classes/application.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quora-api/target/classes/com/upgrad/quora/api/controller/AdminController.class" beforeDir="false" afterPath="$PROJECT_DIR$/quora-api/target/classes/com/upgrad/quora/api/controller/AdminController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quora-api/target/classes/com/upgrad/quora/api/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/quora-api/target/classes/com/upgrad/quora/api/controller/UserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quora-api/target/classes/com/upgrad/quora/api/exception/RestExceptionHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/quora-api/target/classes/com/upgrad/quora/api/exception/RestExceptionHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quora-service/target/classes/META-INF/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/quora-service/target/classes/META-INF/maven/com.upgrad.quora/quora-service/pom.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/quora-service/target/classes/META-INF/maven/com.upgrad.quora/quora-service/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/quora-service/target/classes/com/upgrad/quora/service/business/AdminService.class" beforeDir="false" afterPath="$PROJECT_DIR$/quora-service/target/classes/com/upgrad/quora/service/business/AdminService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quora-service/target/classes/com/upgrad/quora/service/business/UserAuthenticationService.class" beforeDir="false" afterPath="$PROJECT_DIR$/quora-service/target/classes/com/upgrad/quora/service/business/UserAuthenticationService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quora-service/target/classes/com/upgrad/quora/service/dao/UserAuthDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/quora-service/target/classes/com/upgrad/quora/service/dao/UserAuthDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quora-service/target/classes/com/upgrad/quora/service/dao/UserDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/quora-service/target/classes/com/upgrad/quora/service/dao/UserDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quora-api/src/main/java/com/upgrad/quora/api/controller/QuestionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/quora-api/src/main/java/com/upgrad/quora/api/controller/QuestionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quora-service/src/main/java/com/upgrad/quora/service/business/QuestionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/quora-service/src/main/java/com/upgrad/quora/service/business/QuestionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quora-service/src/main/java/com/upgrad/quora/service/dao/QuestionDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/quora-service/src/main/java/com/upgrad/quora/service/dao/QuestionDao.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -230,7 +216,7 @@
       <workItem from="1538642827225" duration="1059000" />
       <workItem from="1538723860955" duration="5425000" />
       <workItem from="1597318703723" duration="691000" />
-      <workItem from="1597488303983" duration="1114000" />
+      <workItem from="1597488303983" duration="11622000" />
     </task>
     <servers />
   </component>
@@ -270,6 +256,38 @@
     <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
+    <state width="1237" height="274" key="GridCell.Tab.0.bottom" timestamp="1597512791554">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="274" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1597512791554" />
+    <state width="1237" height="274" key="GridCell.Tab.0.center" timestamp="1597512791553">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="274" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1597512791553" />
+    <state width="1237" height="274" key="GridCell.Tab.0.left" timestamp="1597512791553">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="274" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1597512791553" />
+    <state width="1237" height="274" key="GridCell.Tab.0.right" timestamp="1597512791553">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="274" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1597512791553" />
+    <state width="1237" height="274" key="GridCell.Tab.1.bottom" timestamp="1597512791554">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="274" key="GridCell.Tab.1.bottom/0.0.1280.680@0.0.1280.680" timestamp="1597512791554" />
+    <state width="1237" height="274" key="GridCell.Tab.1.center" timestamp="1597512791554">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="274" key="GridCell.Tab.1.center/0.0.1280.680@0.0.1280.680" timestamp="1597512791554" />
+    <state width="1237" height="274" key="GridCell.Tab.1.left" timestamp="1597512791554">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="274" key="GridCell.Tab.1.left/0.0.1280.680@0.0.1280.680" timestamp="1597512791554" />
+    <state width="1237" height="274" key="GridCell.Tab.1.right" timestamp="1597512791554">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="274" key="GridCell.Tab.1.right/0.0.1280.680@0.0.1280.680" timestamp="1597512791554" />
     <state x="121" y="0" key="SettingsEditor" timestamp="1597318782451">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
