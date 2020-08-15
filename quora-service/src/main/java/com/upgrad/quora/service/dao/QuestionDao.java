@@ -6,7 +6,9 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 @Repository
 public class QuestionDao {
@@ -30,14 +32,14 @@ public class QuestionDao {
      * Get all QUESTIONS
      * Signin before creating a question is mandatory
      */
-//    public List<QuestionEntity> getAllQuestions() {
-//        try{
-//            return entityManager
-//                    .createNamedQuery("getAllQuestions", QuestionEntity.class)
-//                    .getResultList();
-//        }
-//        catch (NoResultException nre) {
-//            return null;
-//        }
-//    }
+    public List<QuestionEntity> getAllQuestions() {
+        try{
+            return entityManager
+                    .createNamedQuery("getAllQuestions", QuestionEntity.class)
+                    .getResultList();
+        }
+        catch (NoResultException nre) {
+            return null;
+        }
+    }
 }

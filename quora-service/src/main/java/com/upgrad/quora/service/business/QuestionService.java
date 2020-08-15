@@ -8,6 +8,7 @@ import com.upgrad.quora.service.exception.AuthorizationFailedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -51,20 +52,20 @@ public class QuestionService {
      * Signin before creating a question is mandatory
      * @param accessToken of user who logged in
      */
-//    public List<QuestionEntity> getAllQuestions(String accessToken) throws AuthorizationFailedException{
-//
-//        UserAuthEntity userAuthEntity = userAuthDao.getUserAuthByToken(accessToken);
-//        if(userAuthEntity == null){
-//            throw new AuthorizationFailedException("ATHR-001", "User has not signed in");
-//        }
-//
-//        if(userAuthEntity.getLogoutAt()!=null){
-//            throw new AuthorizationFailedException("ATHR-002",
-//                    "User is signed out.Sign in first to get all questions");
-//        }
-//
-//        List<QuestionEntity> questionEntity = questionDao.getAllQuestions();
-//
-//        return questionEntity;
-//    }
+    public List<QuestionEntity> getAllQuestions(String accessToken) throws AuthorizationFailedException{
+
+        UserAuthEntity userAuthEntity = userAuthDao.getUserAuthByToken(accessToken);
+        if(userAuthEntity == null){
+            throw new AuthorizationFailedException("ATHR-001", "User has not signed in");
+        }
+
+        if(userAuthEntity.getLogoutAt()!=null){
+            throw new AuthorizationFailedException("ATHR-002",
+                    "User is signed out.Sign in first to get all questions");
+        }
+
+        List<QuestionEntity> questionEntity = questionDao.getAllQuestions();
+
+        return questionEntity;
+    }
 }

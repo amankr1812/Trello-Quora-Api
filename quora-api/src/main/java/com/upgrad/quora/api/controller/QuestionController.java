@@ -1,5 +1,6 @@
 package com.upgrad.quora.api.controller;
 
+import com.upgrad.quora.api.model.QuestionDetailsResponse;
 import com.upgrad.quora.api.model.QuestionRequest;
 import com.upgrad.quora.api.model.QuestionResponse;
 import com.upgrad.quora.service.business.QuestionService;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/")
@@ -58,22 +61,22 @@ public class QuestionController {
      * Signin before creating a question is mandatory
      * @param accessToken of user who logged in
      */
-//    @RequestMapping(method = RequestMethod.GET, path = "/question/all",
-//            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-//    public ResponseEntity<List<QuestionDetailsResponse>> getAllQuestions(@RequestHeader("authorization") final  String authorization)
-//            throws AuthorizationFailedException{
-//
-//        String[] bearerToken = authorization.split("Bearer ");
-//        List<QuestionEntity> questionEntity = questionService.getAllQuestions(bearerToken[1]);
-//        List<QuestionDetailsResponse> questionDetailsResponse = new ArrayList<>();
-//        for(QuestionEntity questions :questionEntity){
-//            QuestionDetailsResponse response = new QuestionDetailsResponse();
-//            response.setId(questions.getUuid());
-//            response.setContent(questions.getContent());
-//            questionDetailsResponse.add(response);
-//        }
-//
-//        return  new ResponseEntity<List<QuestionDetailsResponse>>(questionDetailsResponse, HttpStatus.OK);
-//    }
+    @RequestMapping(method = RequestMethod.GET, path = "/question/all",
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<List<QuestionDetailsResponse>> getAllQuestions(@RequestHeader("authorization") final  String authorization)
+            throws AuthorizationFailedException{
+
+        String[] bearerToken = authorization.split("Bearer ");
+        List<QuestionEntity> questionEntity = questionService.getAllQuestions(bearerToken[1]);
+        List<QuestionDetailsResponse> questionDetailsResponse = new ArrayList<>();
+        for(QuestionEntity questions :questionEntity){
+            QuestionDetailsResponse response = new QuestionDetailsResponse();
+            response.setId(questions.getUuid());
+            response.setContent(questions.getContent());
+            questionDetailsResponse.add(response);
+        }
+
+        return  new ResponseEntity<List<QuestionDetailsResponse>>(questionDetailsResponse, HttpStatus.OK);
+    }
 
 }

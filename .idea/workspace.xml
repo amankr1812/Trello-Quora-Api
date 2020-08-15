@@ -5,12 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="47a15d9d-c79e-46a9-bbbf-df38ac55657d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/quora-api/src/main/java/com/upgrad/quora/api/controller/QuestionController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/quora-service/src/main/java/com/upgrad/quora/service/business/QuestionService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/quora-service/src/main/java/com/upgrad/quora/service/dao/QuestionDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quora-api/target/classes/com/upgrad/quora/api/controller/CommonController.class" beforeDir="false" afterPath="$PROJECT_DIR$/quora-api/target/classes/com/upgrad/quora/api/controller/CommonController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quora-service/target/classes/com/upgrad/quora/service/business/CommonService.class" beforeDir="false" afterPath="$PROJECT_DIR$/quora-service/target/classes/com/upgrad/quora/service/business/CommonService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quora-api/src/main/java/com/upgrad/quora/api/controller/QuestionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/quora-api/src/main/java/com/upgrad/quora/api/controller/QuestionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quora-service/src/main/java/com/upgrad/quora/service/business/QuestionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/quora-service/src/main/java/com/upgrad/quora/service/business/QuestionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quora-service/src/main/java/com/upgrad/quora/service/dao/QuestionDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/quora-service/src/main/java/com/upgrad/quora/service/dao/QuestionDao.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -218,7 +216,7 @@
       <workItem from="1538642827225" duration="1059000" />
       <workItem from="1538723860955" duration="5425000" />
       <workItem from="1597318703723" duration="691000" />
-      <workItem from="1597488303983" duration="11334000" />
+      <workItem from="1597488303983" duration="11622000" />
     </task>
     <servers />
   </component>
