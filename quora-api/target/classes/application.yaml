@@ -4,21 +4,14 @@ server:
     contextPath: /api
 
 spring:
-
-  application:
-    name:
-
-  datasource:
-    driverClassName: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/quora
-    username: postgres
-    password: root
-
   jpa:
     show-sql: true
-    properties:
-      hibernate:
-        ddl-auto: update
-        temp:
-          use_jdbc_metadata_defaults: false
+    hibernate:
+      ddl-auto: update
+  datasource:
+    platform: postgres
+    url: jdbc:postgresql://localhost:5432/quora
+    username: postgres
+    password: password
+    driverClassName: org.postgresql.Driver
     database-platform: org.hibernate.dialect.PostgreSQL9Dialect
