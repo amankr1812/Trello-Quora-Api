@@ -6,10 +6,13 @@ import com.upgrad.quora.api.model.QuestionResponse;
 import com.upgrad.quora.service.business.QuestionService;
 import com.upgrad.quora.service.entity.QuestionEntity;
 import com.upgrad.quora.service.exception.AuthorizationFailedException;
+import com.upgrad.quora.service.exception.UserNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -38,14 +41,14 @@ public class QuestionController {
                                                            @RequestHeader("authorization") final  String authorization)
     throws AuthorizationFailedException {
 
-        String[] bearerToken = authorization.split("Bearer ");
+        //String[] bearerToken = authorization.split("Bearer ");
         QuestionEntity questionEntity = new QuestionEntity();
 
         questionEntity.setContent(questionRequest.getContent());
         questionEntity.setDate(ZonedDateTime.now());
 
 
-        QuestionEntity createdQuestion = questionService.createQuestion(questionEntity, bearerToken[1]);
+        QuestionEntity createdQuestion = questionService.createQuestion(questionEntity, authorization);
 
         QuestionResponse questionResponse = new QuestionResponse()
                 .id(createdQuestion.getUuid())
@@ -66,8 +69,8 @@ public class QuestionController {
     public ResponseEntity<List<QuestionDetailsResponse>> getAllQuestions(@RequestHeader("authorization") final  String authorization)
             throws AuthorizationFailedException{
 
-        String[] bearerToken = authorization.split("Bearer ");
-        List<QuestionEntity> questionEntity = questionService.getAllQuestions(bearerToken[1]);
+       // String[] bearerToken = authorization.split("Bearer ");
+        List<QuestionEntity> questionEntity = questionService.getAllQuestions(authorization);
         List<QuestionDetailsResponse> questionDetailsResponse = new ArrayList<>();
         for(QuestionEntity questions :questionEntity){
             QuestionDetailsResponse response = new QuestionDetailsResponse();
@@ -78,5 +81,28 @@ public class QuestionController {
 
         return  new ResponseEntity<List<QuestionDetailsResponse>>(questionDetailsResponse, HttpStatus.OK);
     }
+    
+    /**
+     * Get all questions by a user
+     *
+     * @param uuid of the user whose questions are to be seen
+     * @param accessToken of the user user.
+     */
+    @RequestMapping( method = RequestMethod.GET, path = "question/all/{userId}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE) 
+    public ResponseEntity<List<QuestionDetailsResponse>> getQuestionByUserId(@RequestHeader("authorization") final String accessToken, @PathVariable("userId") String userId)
+        throws AuthorizationFailedException, UserNotFoundException {
+
+      List<QuestionEntity> questions = questionService.getAllQuestionsByUser(userId, accessToken);
+      List<QuestionDetailsResponse> questionDetailResponses = new ArrayList<>();
+      for (QuestionEntity questionEntity : questions) {
+        QuestionDetailsResponse questionDetailResponse = new QuestionDetailsResponse();
+        questionDetailResponse.setId(questionEntity.getUuid());
+        questionDetailResponse.setContent(questionEntity.getContent());
+        questionDetailResponses.add(questionDetailResponse);
+      }
+      return new ResponseEntity<List<QuestionDetailsResponse>>(
+          questionDetailResponses, HttpStatus.OK);
+    }
+
 
 }
