@@ -1,5 +1,6 @@
 package com.upgrad.quora.api.controller;
 
+import com.upgrad.quora.api.model.QuestionDeleteResponse;
 import com.upgrad.quora.api.model.QuestionDetailsResponse;
 import com.upgrad.quora.api.model.QuestionEditRequest;
 import com.upgrad.quora.api.model.QuestionEditResponse;
@@ -124,6 +125,25 @@ public class QuestionController {
       questionEditResponse.setId(questionEntity.getUuid());
       questionEditResponse.setStatus("QUESTION EDITED");
       return new ResponseEntity<QuestionEditResponse>(questionEditResponse, HttpStatus.OK);
+    }
+    
+    /**
+     * DELETE A QUESTION
+     *
+     * @param accessToken of the signed in user
+     * @param questionId of the question to be edited.
+     */
+    @RequestMapping(method = RequestMethod.DELETE, path = "/question/delete/{questionId}")
+    public ResponseEntity<QuestionDeleteResponse> deleteQuestion(
+        @RequestHeader("authorization") final String accessToken,
+        @PathVariable("questionId") final String questionId)
+        throws AuthorizationFailedException, InvalidQuestionException {
+
+      QuestionEntity questionEntity = questionService.deleteQuestion(accessToken, questionId);
+      QuestionDeleteResponse questionDeleteResponse = new QuestionDeleteResponse();
+      questionDeleteResponse.setId(questionEntity.getUuid());
+      questionDeleteResponse.setStatus("QUESTION DELETED");
+      return new ResponseEntity<QuestionDeleteResponse>(questionDeleteResponse, HttpStatus.OK);
     }
 
 
