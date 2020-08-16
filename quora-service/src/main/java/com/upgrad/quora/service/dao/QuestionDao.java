@@ -59,7 +59,7 @@ public class QuestionDao {
     }
 
     /**
-     * UPDATE QUESTION
+     * UPDATE/EDIT QUESTION
      * @param questionEntity to be updated.
      */
     public void updateQuestion(QuestionEntity questionEntity) {
@@ -80,9 +80,6 @@ public class QuestionDao {
      * @param uuid of the user are questions are to be seen
      */
     public List<QuestionEntity> getAllQuestionsByUser(final UserEntity userId) {
-      return entityManager
-          .createNamedQuery("getQuestionByUser", QuestionEntity.class)
-          .setParameter("user", userId)
-          .getResultList();
+      return entityManager.createNamedQuery("getQuestionByUser", QuestionEntity.class).setParameter("user", userId).getResultList();
     }
 }
