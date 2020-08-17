@@ -28,16 +28,23 @@ public class AnswerDao {
      * Modify Answer for a corresponding question and user then save it
      * @param answer Answer Entity which is needed to be saved
      */
-    public void editAnswerContent(AnswerEntity answer){
+    public void editAnswerContent(AnswerEntity answer) {
         entityManager.merge(answer);
     }
 
+    /***
+     * Delete Answer for a corresponding question and user
+     * @param answer Answer Entity which is to be deleted
+     */
+    public void deleteAnswer(AnswerEntity answer) {
+        entityManager.remove(answer);
+    }
+
     public AnswerEntity getAnswerById(String answerId) throws AnswerNotFoundException {
-        try{
+        try {
             return entityManager.createNamedQuery("getAnswerById", AnswerEntity.class)
                     .setParameter("uuid", answerId).getSingleResult();
-        }
-        catch (NoResultException e){
+        } catch (NoResultException e) {
             throw new AnswerNotFoundException("ANS-001", "Entered answer uuid does not exist");
         }
     }
