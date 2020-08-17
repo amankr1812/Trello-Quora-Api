@@ -38,7 +38,7 @@ public class AnswerService {
      * @throws InvalidQuestionException When the question for corresponding questionId doesn't exist
      */
     @Transactional(propagation = Propagation.REQUIRED)
-    public AnswerEntity createAnswer(final String accessToken, String questionId, AnswerEntity answer) throws
+    public AnswerEntity createAnswer(final String accessToken, final String questionId, AnswerEntity answer) throws
             InvalidQuestionException, AuthorizationFailedException {
 
         UserAuthEntity user = getUser(accessToken);
@@ -63,7 +63,7 @@ public class AnswerService {
      * @throws AnswerNotFoundException When the answer for corresponding answerId doesn't exist
      */
     @Transactional(propagation = Propagation.REQUIRED)
-    public void editAnswerContent(final String accessToken, String answerId, String content) throws AnswerNotFoundException, AuthorizationFailedException {
+    public void editAnswerContent(final String accessToken, final String answerId, String content) throws AnswerNotFoundException, AuthorizationFailedException {
         UserAuthEntity user = getUser(accessToken);
         if (isUserSignedOut(user)){
             throw new AuthorizationFailedException("ATHR-002", "User is signed out.Sign in first to edit an answer");
@@ -76,7 +76,27 @@ public class AnswerService {
         answerDao.editAnswerContent(answer);
     }
 
-    /**
+    /***
+     * @param accessToken Access token of the signed in user
+     * @param answerId Id of answer which is to be deleted
+     * @throws AuthorizationFailedException When user is not signed in, expired access token is being used,
+     * user is not the admin or the owner of the answer
+     * @throws AnswerNotFoundException When the answer for corresponding answerId doesn't exist
+     */
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void deleteAnswer(final String accessToken, final String answerId) throws AnswerNotFoundException, AuthorizationFailedException {
+        UserAuthEntity user = getUser(accessToken);
+        if (isUserSignedOut(user)){
+            throw new AuthorizationFailedException("ATHR-002", "User is signed out.Sign in first to edit an answer");
+        }
+        AnswerEntity answer = answerDao.getAnswerById(answerId);
+        if (!user.getUserEntity().getUuid().equals(answer.getUserEntity().getUuid()) && user.getUserEntity().getRole().equals("nonadmin")){
+            throw new AuthorizationFailedException("ATHR-003", "Only the answer owner or admin can delete the answer");
+        }
+        answerDao.deleteAnswer(answer);
+    }
+
+    /***
      * @param accessToken Access token of user
      * @return {@code UserAuthEntity} If the access token is valid
      * @throws AuthorizationFailedException If the user has not signed in

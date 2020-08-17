@@ -1,9 +1,6 @@
 package com.upgrad.quora.api.controller;
 
-import com.upgrad.quora.api.model.AnswerEditRequest;
-import com.upgrad.quora.api.model.AnswerEditResponse;
-import com.upgrad.quora.api.model.AnswerRequest;
-import com.upgrad.quora.api.model.AnswerResponse;
+import com.upgrad.quora.api.model.*;
 import com.upgrad.quora.service.business.AnswerService;
 import com.upgrad.quora.service.entity.AnswerEntity;
 import com.upgrad.quora.service.exception.AnswerNotFoundException;
@@ -62,5 +59,24 @@ public class AnswerController {
         answerService.editAnswerContent(accessToken, answerId, request.getContent());
         AnswerEditResponse response = new AnswerEditResponse().status("OK - Answer changed successfully");
         return new ResponseEntity<AnswerEditResponse>(response, HttpStatus.OK);
+    }
+
+    /***
+     * @param accessToken Access token of the signed in user
+     * @param answerId Id of answer which is to be deleted
+     * @return {@code ResponseEntity<AnswerResponse>} after the answer is successfully posted
+     * @throws AuthorizationFailedException When user is not signed in, expired access token is being used,
+     * user is not the admin or the owner of the answer
+     * @throws AnswerNotFoundException When the answer for corresponding answerId doesn't exist
+     */
+    @RequestMapping(path = "/answer/delete/{answerId}", method = RequestMethod.DELETE,
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<AnswerDeleteResponse> deleteAnswer(
+            @RequestHeader("authorization") final String accessToken,
+            @PathVariable("answerId") String answerId) throws AuthorizationFailedException, AnswerNotFoundException {
+
+        AnswerDeleteResponse response = new AnswerDeleteResponse().id(answerId).status("OK - Answer deleted successfully");
+        answerService.deleteAnswer(accessToken, answerId);
+        return new ResponseEntity<AnswerDeleteResponse>(response, HttpStatus.OK);
     }
 }
