@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -29,7 +30,7 @@ public class AnswerService {
     @Autowired
     private AnswerDao answerDao;
 
-    /***
+    /**
      * @param accessToken Access token of the signed in user
      * @param questionId Id of question whose answer is to be created
      * @param answer Answer Entity which is needed to be saved
@@ -46,7 +47,10 @@ public class AnswerService {
             throw new AuthorizationFailedException("ATHR-002", "User is signed out.Sign in first to post an answer");
         }
 
-        QuestionEntity question = getQuestion(questionId);
+        QuestionEntity question = questionDao.getQuestionById(questionId);
+        if(question == null){
+            throw new InvalidQuestionException("QUES-001", "The question entered is invalid");
+        }
 
         answer.setDate(ZonedDateTime.now());
         answer.setQuestionEntity(question);
@@ -55,7 +59,7 @@ public class AnswerService {
         return answerDao.createAnswer(answer);
     }
 
-    /***
+    /**
      * @param accessToken Access token of the signed in user
      * @param answerId Id of answer which is to be modified
      * @param content New content for the answer which is to be modified
@@ -63,7 +67,8 @@ public class AnswerService {
      * @throws AnswerNotFoundException When the answer for corresponding answerId doesn't exist
      */
     @Transactional(propagation = Propagation.REQUIRED)
-    public void editAnswerContent(final String accessToken, final String answerId, String content) throws AnswerNotFoundException, AuthorizationFailedException {
+    public void editAnswerContent(final String accessToken, final String answerId, String content) throws
+            AnswerNotFoundException, AuthorizationFailedException {
         UserAuthEntity user = getUser(accessToken);
         if (isUserSignedOut(user)){
             throw new AuthorizationFailedException("ATHR-002", "User is signed out.Sign in first to edit an answer");
@@ -76,7 +81,7 @@ public class AnswerService {
         answerDao.editAnswerContent(answer);
     }
 
-    /***
+    /**
      * @param accessToken Access token of the signed in user
      * @param answerId Id of answer which is to be deleted
      * @throws AuthorizationFailedException When user is not signed in, expired access token is being used,
@@ -84,19 +89,42 @@ public class AnswerService {
      * @throws AnswerNotFoundException When the answer for corresponding answerId doesn't exist
      */
     @Transactional(propagation = Propagation.REQUIRED)
-    public void deleteAnswer(final String accessToken, final String answerId) throws AnswerNotFoundException, AuthorizationFailedException {
+    public void deleteAnswer(final String accessToken, final String answerId) throws AnswerNotFoundException,
+            AuthorizationFailedException {
         UserAuthEntity user = getUser(accessToken);
         if (isUserSignedOut(user)){
             throw new AuthorizationFailedException("ATHR-002", "User is signed out.Sign in first to edit an answer");
         }
         AnswerEntity answer = answerDao.getAnswerById(answerId);
-        if (!user.getUserEntity().getUuid().equals(answer.getUserEntity().getUuid()) && user.getUserEntity().getRole().equals("nonadmin")){
+        if (!user.getUserEntity().getUuid().equals(answer.getUserEntity().getUuid()) &&
+                user.getUserEntity().getRole().equals("nonadmin")){
             throw new AuthorizationFailedException("ATHR-003", "Only the answer owner or admin can delete the answer");
         }
         answerDao.deleteAnswer(answer);
     }
 
-    /***
+    /**
+     * @param accessToken Access token of the signed in user
+     * @param questionId Id of question whose answers are to be fetched
+     * @return {@code List<AnswerEntity>} List of answers for that question
+     * @throws AuthorizationFailedException When user is not signed in, expired access token is being used
+     * @throws InvalidQuestionException When the question for corresponding questionId doesn't exist
+     */
+    public List<AnswerEntity> getAllAnswersToQuestion(final String accessToken, final String questionId) throws
+            InvalidQuestionException, AuthorizationFailedException {
+        UserAuthEntity user = getUser(accessToken);
+        if (isUserSignedOut(user)){
+            throw new AuthorizationFailedException("ATHR-002", "User is signed out.Sign in first to edit an answer");
+        }
+        QuestionEntity question = questionDao.getQuestionById(questionId);
+        if(question == null){
+            throw new InvalidQuestionException("QUES-001",
+                    "The question with entered uuid whose details are to be seen does not exist");
+        }
+        return answerDao.getAllAnswersToQuestion(question.getUuid());
+    }
+
+    /**
      * @param accessToken Access token of user
      * @return {@code UserAuthEntity} If the access token is valid
      * @throws AuthorizationFailedException If the user has not signed in
@@ -109,6 +137,10 @@ public class AnswerService {
         return userAuthEntity;
     }
 
+    /**
+     * @param userAuthEntity User auth details
+     * @return {@code true} if the user have signed out else {@code false}
+     */
     private boolean isUserSignedOut(UserAuthEntity userAuthEntity){
         ZonedDateTime now = ZonedDateTime.now();
         ZonedDateTime logoutAt = userAuthEntity.getLogoutAt();
@@ -118,11 +150,4 @@ public class AnswerService {
         return logoutAt.isBefore(now);
     }
 
-    private QuestionEntity getQuestion(String questionId) throws InvalidQuestionException{
-        QuestionEntity question = questionDao.getQuestionById(questionId);
-        if(question == null){
-            throw new InvalidQuestionException("QUES-001", "The question entered is invalid");
-        }
-        return question;
-    }
 }
