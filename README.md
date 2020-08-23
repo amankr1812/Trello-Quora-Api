@@ -7,3 +7,7 @@ The authentication functionality is implemented in such a way that the API endpo
 # Database Schema
 
 ![alt text](https://github.com/amankr1812/Trello-Quora-Api/blob/master/DatabaseSchema.jpg?raw=true)  
+
+# API Page Screenshot 
+
+![alt text](https://github.com/amankr1812/Trello-Quora-Api/blob/master/API%20Screenshot.PNG?raw=true)  
