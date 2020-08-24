@@ -27,6 +27,11 @@ public class AnswerController {
    * @param accessToken To authenticate the user who is trying to create an answer.
    * @param questionId of the question for which the answer is being created.
    * @param answerRequest Contains the answer content.
+   * @return JSON response with answer creation status along with httpStatus.
+   * @throws AuthorizationFailedException  If the access token which the user provides does not exist
+   *                                       or If the user is not signed in.
+   * @throws InvalidQuestionException  If the question uuid entered by the user whose answer
+   *                                   is to be posted does not exist.
    */
   @RequestMapping(method = RequestMethod.POST,path = "/question/{questionId}/answer/create",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
   public ResponseEntity<AnswerResponse> createAnswer(@RequestHeader("authorization")

@@ -28,6 +28,14 @@ public class UserController {
 
   @Autowired private UserAuthenticationService userAuthService;
 
+  /**
+    * Create New User
+    *
+    * @Param User request details for signUp.
+    * @Return Json response with UUID of user, Creation Status and HTTPStatus.
+    * @throws SignUpRestrictedException if user details validation fails.
+   */
+
   @RequestMapping(
       method = RequestMethod.POST,
       path = "/user/signup",
