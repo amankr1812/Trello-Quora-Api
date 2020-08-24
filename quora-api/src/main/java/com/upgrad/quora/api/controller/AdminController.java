@@ -23,6 +23,9 @@ public class AdminController {
    * Signin before delete is mandatory
    * @param userId of user to be deleted
    * @param accessToken of admin
+   * @return uuid of the deleted user, message 'USER SUCCESSFULLY DELETED' and corresponding HTTP status in the JSON response.
+   * @throws AuthorizationFailedException if user has signed out/if a non-admin tries to delete/if access token does not exist
+   * @throws UserNotFoundException if uuid which is to be deleted is not present in the database
    */
   @RequestMapping(
       method = RequestMethod.DELETE,

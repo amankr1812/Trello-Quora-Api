@@ -23,6 +23,10 @@ public class CommonController {
      * Signin before getting user details is mandatory
      * @param userUuid of user whose details you want to get
      * @param accessToken(authorization) of signed in user
+     * @return JSON response with all the details of the user and corresponding HTTP status.
+     * @throws AuthorizationFailedException If the access token which the user provides does not exist
+     *                                       or If the user is not signed in.
+     * @throws UserNotFoundException if uuid is not present in the database.
      */
     @RequestMapping(method = RequestMethod.GET, path = "/userprofile/{userId}",
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)

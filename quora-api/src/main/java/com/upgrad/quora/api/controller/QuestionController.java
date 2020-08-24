@@ -38,6 +38,9 @@ public class QuestionController {
      * Signin before creating a question is mandatory
      * @param QuestionRequest of user to be created
      * @param accessToken of user who logged in
+     * @throws AuthorizationFailedException If the access token which the user provides does not exist
+     *                                      or If the user is not signed in.
+     * @return JSON Response with Question creation status and HTTPStatus.
      */
     @RequestMapping(method = RequestMethod.POST, path = "/question/create",
     produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
