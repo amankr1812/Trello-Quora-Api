@@ -12,6 +12,6 @@ spring:
     platform: postgres
     url: jdbc:postgresql://localhost:5432/quora
     username: postgres
-    password: root
+    password: password
     driverClassName: org.postgresql.Driver
     database-platform: org.hibernate.dialect.PostgreSQL9Dialect
